@@ -1,6 +1,5 @@
 import { CreateTodoForm } from "@/components/create-todo";
-import { MarkAsDoneButton } from "@/components/mark-as-done";
-import { MarkAsUndoneButton } from "@/components/mark-as-undone";
+import { InputDone } from "@/components/input-done";
 import { Todo } from "@/services/todo/interfaces/todo.interface";
 
 
@@ -35,17 +34,13 @@ export default async function Home() {
       {
         todos?.map((todo: Todo) => (
           <div key={todo.id} className="flex gap-5 items-center justify-between my-5">
-
-            <div className={`${todo.done && 'line-through opacity-40'}`}>
-              <span className="text-sm text-pink-600">{todo.title}</span>
-              <p className="opacity-50 text-xs">{todo.description}</p>
-              <small className="text-gray-400">{dateAgo(todo.createdAt)}</small>
-            </div>
-
-            <div className="flex gap-5 justify-end">
-              {
-                todo.done ? (<MarkAsUndoneButton id={todo.id} />) : (<MarkAsDoneButton id={todo.id} />)
-              }
+            <div className="flex gap-3 items-start">
+              <InputDone id={todo.id} isDone={todo.done} />
+              <div className={`${todo.done && 'line-through opacity-40'}`}>
+                <span className="text-sm text-pink-600">{todo.title}</span>
+                <p className="opacity-50 text-xs">{todo.description}</p>
+                <small className="text-gray-400">{dateAgo(todo.createdAt)}</small>
+              </div>
             </div>
           </div>
         ))

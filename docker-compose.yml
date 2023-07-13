@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgresql:
-    container_name: postgresql_dev
+    container_name: postgresql_todo
     image: postgres:alpine
     restart: always
     environment:
@@ -14,7 +14,7 @@ services:
       - postgresql_data:/var/lib/postgresql/data
 
   pgadmin:
-    container_name: pgadmin4_dev
+    container_name: pgadmin4_todo
     image: dpage/pgadmin4:latest
     restart: always
     environment:

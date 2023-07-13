@@ -8,8 +8,10 @@ export async function generateMetadata({ params }: { params: { [slug] } }): Prom
   const todos = await fetch('http://localhost:3000/api/todos', {
     method: 'GET',
   }).then((res) => res.json())
-  return { title: `TODOS | ${todos.length}` }
+  return { title: `TODOS | ${todos ? todos.length : '0'}` }
 }
+
+
 
 
 export default async function Home() {
@@ -22,7 +24,7 @@ export default async function Home() {
 
       {
         todos?.map((todo: Todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+          <TodoItem key={todo.id} todo={todo} />
         ))
       }
       <CreateTodoForm />

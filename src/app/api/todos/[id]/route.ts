@@ -23,4 +23,12 @@ export async function PATCH(request: Request, { params }: Segments) {
 }
 
 
+export async function DELETE(request: Request, { params }: Segments) {
+    const { id } = params
+
+    await todoController.deleteTodoById(id)
+
+    return NextResponse.json({ message: 'Todo deleted' })
+}
+
 

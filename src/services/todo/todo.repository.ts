@@ -31,8 +31,11 @@ export class TodoRepository implements TodoRepositoryInterface {
         })
     }
     async deleteTodoById(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        await prisma.todo.delete({
+            where: { id }
+        })
     }
+
     async getTodosByUserId(userId: string): Promise<Todo[]> {
         throw new Error("Method not implemented.");
     }

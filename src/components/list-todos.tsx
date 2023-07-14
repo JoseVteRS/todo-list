@@ -15,7 +15,11 @@ export const ListTodo = () => {
         queryFn: () => getTodos(),
     })
 
-    if (isLoading) return <p>Loading...</p>
+
+    if (isLoading || isFetching) return <div className="min-h-[calc(100vh-300px)]">Loading...</div>
+    if (error) return <div className="max-h-[calc(100vh-300px)]">Error</div>
+
+
 
     return (
         <div className="list-todos overflow-y-scroll max-h-[calc(100vh-300px)] px-5">

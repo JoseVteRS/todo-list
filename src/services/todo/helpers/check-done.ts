@@ -1,6 +1,6 @@
 
 
-export const checkDone = async (id: string, isDone: boolean) => {
+export const checkDone = async ({ id, isDone }: { id: string, isDone: boolean }) => {
 
     try {
         const response = await fetch(`/api/todos/${id}`, {

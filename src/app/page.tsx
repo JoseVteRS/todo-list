@@ -1,34 +1,23 @@
 import { CreateTodoForm } from "@/components/create-todo";
-import { TodoItem } from "@/components/todo-item";
-import { Todo } from "@/services/todo/interfaces/todo.interface";
-
-import type { Metadata } from 'next';
-
-export async function generateMetadata({ params }: { params: { [slug] } }): Promise<Metadata> {
-  const todos = await fetch('http://localhost:3000/api/todos', {
-    method: 'GET',
-  }).then((res) => res.json())
-  return { title: `TODOS | ${todos ? todos.length : '0'}` }
-}
-
+import { ReactQueryHydrate } from "@/components/hydrate-client";
+import { ListTodo } from "@/components/list-todos";
+import getQueryClient from "@/lib/get-query-client";
+import { getTodos } from "@/services/todo/get-todo";
+import { dehydrate } from "@tanstack/react-query";
 
 
 
 export default async function Home() {
-  const todos = await fetch('http://localhost:3000/api/todos', {
-    method: 'GET',
-  }).then((res) => res.json())
+  const queryClient = getQueryClient()
+  await queryClient.prefetchQuery(['todos'], () => getTodos())
+  const dehydratedState = dehydrate(queryClient)
 
   return (
-    <main className="min-h-screen w-10/12 mx-auto py-8">
-
-      {
-        todos?.map((todo: Todo) => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))
-      }
-      <CreateTodoForm />
-
-    </main>
+    <ReactQueryHydrate state={dehydratedState}>
+      <main className="min-h-screen w-10/12 mx-auto py-8">
+        <ListTodo />
+        <CreateTodoForm />
+      </main>
+    </ReactQueryHydrate>
   )
 }

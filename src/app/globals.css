@@ -25,3 +25,18 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+.list-todos::-webkit-scrollbar {
+  width: .4rem;
+  border-radius: 99px;
+}
+
+.list-todos::-webkit-scrollbar-track {
+ 
+}
+
+.list-todos::-webkit-scrollbar-thumb {
+  background-color: rgb(61, 61, 61);
+  border-radius: 99px;
+}

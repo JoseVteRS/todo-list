@@ -1,4 +1,3 @@
-import { dateAgo } from '@/helper'
 import { Todo } from '@/services/todo/interfaces/todo.interface'
 import { InputDone } from './input-done'
 import { RemoveButton } from './remove-button'
@@ -16,7 +15,7 @@ export const TodoItem = ({ todo }: Props) => {
                 <div className={`${todo.done && 'line-through opacity-40'} border border-gray-600 rounded-xl px-5 py-2 w-full`}>
                     <span className="text-sm text-sky-400 font-bold">{todo.title}</span>
                     <p className="opacity-50 text-xs">{todo.description}</p>
-                    <small className="text-gray-400">{dateAgo(todo.createdAt)}</small>
+                    {/* <small className="text-gray-400">{dateAgo(todo.createdAt)}</small> */}
                 </div>
             </div>
 
